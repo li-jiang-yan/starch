@@ -125,10 +125,10 @@ void loop() {
   }
   randNumber = random(0, 2);
   if (yPosition < yLowerBound) {
-    // Serial.print("yPosition exceeding lower bound. yPosition: "); Serial.println(yPosition);
+    Serial.print("yPosition exceeding lower bound. yPosition: "); Serial.println(yPosition);
     digitalWrite(4, HIGH); yChange = 1;
   } else if (yPosition > yUpperBound) {
-    // Serial.print("yPosition exceeding upper bound. yPosition: "); Serial.println(yPosition);
+    Serial.print("yPosition exceeding upper bound. yPosition: "); Serial.println(yPosition);
     digitalWrite(4, LOW); yChange = -1;
   } else if (randNumber) {
     digitalWrite(4, HIGH); yChange = 1;
@@ -149,7 +149,10 @@ void loop() {
     } else if (!limitSwitch4) {
       yPosition = yAxisMaximum;
     }
-    if (xPosition < xLowerBound | xPosition > xUpperBound | yPosition < yLowerBound | yPosition > yUpperBound) break;
+    if (xPosition < xLowerBound || xPosition > xUpperBound || yPosition < yLowerBound || yPosition > yUpperBound) {
+      Serial.println("Either upper or lower bound has been exceeded!");
+      break;
+    }
     Sensor1 = digitalRead(10); Sensor2 = digitalRead(11);
     if (Sensor1 || Sensor2) {
       delayMicroseconds(360);
