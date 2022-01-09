@@ -53,7 +53,7 @@ void setup() {
       delayMicroseconds(180);
     }
   }
-  xPosition = xAxisMaximum; Serial.print("xAxisMaximum: "); Serial.println(xAxisMaximum);
+  xPosition = xAxisMaximum; // Serial.print("xAxisMaximum: "); Serial.println(xAxisMaximum);
 
   // ========== go to x = max / 2 ==========
   digitalWrite(2, LOW);
@@ -90,7 +90,7 @@ void setup() {
       delayMicroseconds(180);
     }
   }
-  yPosition = yAxisMaximum; Serial.print("yAxisMaximum: "); Serial.println(yAxisMaximum);
+  yPosition = yAxisMaximum; // Serial.print("yAxisMaximum: "); Serial.println(yAxisMaximum);
 
   // ========== go to x = max / 2 ==========
   digitalWrite(4, LOW);
@@ -103,20 +103,20 @@ void setup() {
     }
   }
 
-  xLowerBound = xAxisMaximum * 0.25; Serial.print("xLowerBound: "); Serial.println(xLowerBound);
-  xUpperBound = xAxisMaximum * 0.75; Serial.print("xUpperBound: "); Serial.println(xUpperBound);
-  yLowerBound = yAxisMaximum * 0.25; Serial.print("yLowerBound: "); Serial.println(yLowerBound);
-  yUpperBound = yAxisMaximum * 0.75; Serial.print("yUpperBound: "); Serial.println(yUpperBound);
+  xLowerBound = xAxisMaximum * 0.25; // Serial.print("xLowerBound: "); Serial.println(xLowerBound);
+  xUpperBound = xAxisMaximum * 0.75; // Serial.print("xUpperBound: "); Serial.println(xUpperBound);
+  yLowerBound = yAxisMaximum * 0.25; // Serial.print("yLowerBound: "); Serial.println(yLowerBound);
+  yUpperBound = yAxisMaximum * 0.75; // Serial.print("yUpperBound: "); Serial.println(yUpperBound);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   randNumber = random(0, 2);
   if (xPosition < xLowerBound) {
-    Serial.print("xPosition exceeding lower bound. xPosition: "); Serial.println(xPosition);
+    // Serial.print("xPosition exceeding lower bound. xPosition: "); Serial.println(xPosition);
     digitalWrite(2, HIGH); xChange = 1;
   } else if (xPosition > xUpperBound) {
-    Serial.print("xPosition exceeding upper bound. xPosition: "); Serial.println(xPosition);
+    // Serial.print("xPosition exceeding upper bound. xPosition: "); Serial.println(xPosition);
     digitalWrite(2, LOW); xChange = -1;
   } else if (randNumber) {
     digitalWrite(2, HIGH); xChange = 1;
@@ -125,17 +125,17 @@ void loop() {
   }
   randNumber = random(0, 2);
   if (yPosition < yLowerBound) {
-    Serial.print("yPosition exceeding lower bound. yPosition: "); Serial.println(yPosition);
+    // Serial.print("yPosition exceeding lower bound. yPosition: "); Serial.println(yPosition);
     digitalWrite(4, HIGH); yChange = 1;
   } else if (yPosition > yUpperBound) {
-    Serial.print("yPosition exceeding upper bound. yPosition: "); Serial.println(yPosition);
+    // Serial.print("yPosition exceeding upper bound. yPosition: "); Serial.println(yPosition);
     digitalWrite(4, LOW); yChange = -1;
   } else if (randNumber) {
     digitalWrite(4, HIGH); yChange = 1;
   } else {
     digitalWrite(4, LOW); yChange = -1;
   }
-  for (int i = 6400; i > 0; i--) {
+  for (int i = 12800; i > 0; i--) {
     digitalWrite(3, LOW); digitalWrite(3, HIGH); xPosition += xChange; // Serial.println(xPosition);
     digitalWrite(5, LOW); digitalWrite(5, HIGH); yPosition += yChange; // Serial.println(yPosition);
     limitSwitch1 = digitalRead(6); limitSwitch2 = digitalRead(7); limitSwitch3 = digitalRead(8); limitSwitch4 = digitalRead(9);
@@ -149,15 +149,8 @@ void loop() {
     } else if (!limitSwitch4) {
       yPosition = yAxisMaximum;
     }
-    if (xPosition < xLowerBound || xPosition > xUpperBound || yPosition < yLowerBound || yPosition > yUpperBound) {
-      Serial.println("Either upper or lower bound has been exceeded!");
-      break;
-    }
+    if (xPosition < xLowerBound || xPosition > xUpperBound || yPosition < yLowerBound || yPosition > yUpperBound) break;
     Sensor1 = digitalRead(10); Sensor2 = digitalRead(11);
-    if (Sensor1 || Sensor2) {
-      delayMicroseconds(360);
-    } else {
-      delayMicroseconds(180);
-    }
+    delayMicroseconds(180);p[;/,
   }
 }
